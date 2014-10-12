@@ -6,7 +6,11 @@ if (!file.exists("household_power_consumption.txt")) {
 }
 
 #read data from file
-data <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", na.strings = "?", dec = ".", col.names = c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3"), colClasses = c("character", "character", rep("numeric",7)))
+data <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", 
+                    na.strings = "?", dec = ".", col.names = c("Date","Time","Global_active_power",
+                                                              "Global_reactive_power","Voltage","Global_intensity",
+                                                              "Sub_metering_1","Sub_metering_2","Sub_metering_3"), 
+                    colClasses = c("character", "character", rep("numeric",7)))
 
 #add new column "DT" in data.frame and transform it to date type
 data$DT <- strptime(paste(data$Date, data$Time), format = "%d/%m/%Y %H:%M:%S")
@@ -26,7 +30,8 @@ with(graphData, lines(DT, Sub_metering_2, col = "red"))
 with(graphData, lines(DT, Sub_metering_3, col = "blue"))
 
 #create legend for plot
-legend("topright", lwd = 1, cex = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+legend("topright", lwd = 1, cex = 1, col = c("black", "red", "blue"), 
+        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 #switch off device
 dev.off()
